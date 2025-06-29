@@ -1,0 +1,43 @@
+---
+import type { Heading } from '../types/Heading';
+const headings: Heading[] | undefined = Astro.props?.indexHeadings;
+---
+
+{
+  headings && headings.length > 0 &&
+  <aside class="index-sidebar">
+    <div class="index-sidebar">
+
+      <a href="#" style="color: rgba(var(--grey-light), .5); text-decoration: none;">
+        <span style="font-size: 1rem"> Table of Contents </span>
+      </a>
+	
+      <ul class="index-sidebar-element">
+        {
+          headings.map(h => (
+            <li class="index-sidebar-element">
+              <a class="index-sidebar-element" href={`#${h.id}`}> {h.title} </a>
+              {
+                h.children && h.children.length > 0 && (
+                  <ul class="index-sidebar-element">
+                  {
+                    h.children.map(c => (
+                        <li class="index-sidebar-element index-sidebar-nested">
+                          <a class="index-sidebar-element index-sidebar-nested" href={`#${c.id}`}> {c.title} </a>
+                        </li>
+                      )
+                    )
+                  }
+                  </ul>
+                )
+              }
+           </li>
+          ))
+        }
+      </ul>
+    </div>
+  </aside>
+}
+
+{ headings && headings.length > 0 && <script src="/js/tableofcontents.js" is:inline /> }
+
