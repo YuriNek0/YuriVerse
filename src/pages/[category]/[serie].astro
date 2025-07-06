@@ -1,0 +1,17 @@
+---
+import { getEntry, getCollection } from 'astro:content';
+import { slug } from 'github-slugger';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('serie');
+	return await Promise.all(posts.map(async (post) => {
+    const serie = slug(post.data.title);
+		const categoryId = post.id.split('/')[0];
+		const category = await getEntry('category', categoryId);
+
+    return {
+      params: { category: slug(category.data.title), serie }
+    }
+  }))
+}
+---

@@ -1,0 +1,57 @@
+---
+import Heading from '../components/Header.astro';
+import BaseHead from '../components/BaseHead.astro';
+import { SITE_TITLE } from '../consts';
+import "../styles/linkselement.css";
+import links from "../links.json";
+
+const title = "Links";
+const description = "Recommended links.";
+
+// Define a curated palette of light pastel colors
+const pastelColors = [
+  'var(--link-card-blue)',
+  'var(--link-card-green)',
+  'var(--link-card-orange)',
+  'var(--link-card-purple)',
+  'var(--link-card-rose)',
+  'var(--link-card-gold)',
+  'var(--link-card-indigo)',
+];
+let counter = 0;
+---
+<html lang="en">
+	<head>
+		<BaseHead title={`${title} - ${SITE_TITLE}`} description={description} />
+  </head>
+
+  <body>
+    <Heading />
+    <div class="link-title">
+    	<span> YOUR LINKS ARE WELCOMED! </span>
+      <p> Email me, or Create a github issue to make the request. </p>
+    </div>
+
+    <div id="links-grid-container">
+    {
+      links.map(({title, img, description, url}) => {
+        const color = pastelColors[counter];
+        counter = (counter + 1) % pastelColors.length;
+        return (
+          <a href={url} target="_blank" class="link-card-grid-item">
+            <div style={"background-color: "+color}>
+              <div class="link-card-inner">
+                <img src={img} alt="" />
+                <div class="link-card-text">
+                  <h5>{title}</h5>
+                  <p> {description} </p>
+                  <p class="link-card-inner-link"> {url} </p>
+                </div>
+              </div>
+            </div>
+          </a>)
+      })
+    }
+    </div>
+  </body>
+</html>

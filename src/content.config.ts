@@ -1,5 +1,5 @@
 import { glob } from 'astro/loaders';
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z, reference } from 'astro:content';
 import type { Heading } from './types/Heading.ts';
 
 const headingType: z.ZodType<Heading> = z.lazy(() =>
@@ -13,20 +13,35 @@ const headingType: z.ZodType<Heading> = z.lazy(() =>
 
 const blog = defineCollection({
 	// Load Markdown and MDX files in the `src/content/blog/` directory.
-	loader: glob({ base: './src/content/blog', pattern: '**/*.{md,mdx}' }),
+	loader: glob({ base: './src/content', pattern: '**/index.{md,mdx}' }),
 	// Type-check frontmatter using a schema
 	schema: ({ image }) => z.object({
 		title: z.string(),
-		description: z.string(),
 
 		// Transform string to Date object
 		pubDate: z.coerce.date(),
-		updatedDate: z.coerce.date().optional(),
-		heroImage: image().optional(),
 
 		// Indexes
 		indexHeadings: z.array(headingType).optional()
 	}),
 });
 
-export const collections = { blog };
+const category = defineCollection({
+	loader: glob({ base: './src/content', pattern: '*/index.yaml' }),
+	schema: ({ image }) => z.object({
+		title: z.string(),
+		bgColor: z.string().optional(),
+		background: image().optional(),
+		// blogs: z.array(z.union([reference("blog"), reference("serie")]))
+	}),
+});
+
+const serie = defineCollection( {
+	loader: glob({ base: './src/content', pattern: '*/*/index.yaml'}),
+	schema: () => z.object({
+		title: z.string(),
+		// blogs: z.array(reference("blog")),
+	})
+})
+
+export const collections = { blog, category, serie };

@@ -1,0 +1,79 @@
+---
+import '../styles/posttree.css'
+import { getPostTree } from "../scripts/getPostTree";
+import PostTreeNavItem from '../components/PostTreeNavItem.astro'
+
+const { pathname } = Astro.props;
+const titleNavId = Astro.url.pathname.split('/')[1] || '';
+
+const tree = await getPostTree();
+const sections = new Array();
+
+tree.values().forEach(c => {
+  const category = { title: c.title, posts: new Array() };
+  c.blogs.forEach(s => {
+    if (s.type == "Serie") {
+      const serie = { type: "Serie", title: s.title, posts: new Array() }
+      s.blogs.values().forEach(b => {
+        serie.posts.push({type: "BlogPost", title: b.title, url: b.url});
+      })
+      category.posts.push(serie);
+      return;
+    }
+    category.posts.push({ type: "BlogPost", title: s.title, url: s.url });
+  })
+  sections.push(category)
+});
+---
+
+<aside id="posttree-sidebar" class="posttree-sidebar">
+{
+  sections.length !== 0 && (
+    <ul class="posttree-block">
+      {
+        sections.map(category => (
+          <li class="posttree-block">
+            <span class="posttree-category-title"> {category.title.toUpperCase()} </span>
+            {
+              category.posts.length !== 0 && (
+                <ul class="posttree-category-block posttree-block">
+                  {
+                    category.posts.map(post => (
+                      <PostTreeNavItem item={post} pathname={pathname} standalone={true} />
+                    ))
+                  }
+                </ul>
+              )
+            }
+          </li>
+        ))
+      }    
+    </ul>
+  )
+}
+
+</aside>
+
+<script>
+  // Rendered. Now scroll to the active element.
+  const element = document.querySelector("a.posttree-entry-active");
+  const parent = document.querySelector("ul.posttree-block");
+  const top = element.getBoundingClientRect().top;
+  parent.scrollTop += top - window.innerHeight / 2;
+</script>
+
+<script>
+  // Fix the height after DOM loaded
+  window.addEventListener("load", function () {
+    const element = document.querySelector("a.posttree-entry-active");
+    const parent = document.querySelector("ul.posttree-block");
+    const top = element.getBoundingClientRect().top;
+
+    if (top > 3 * window.innerHeight / 4){
+      console.log(123);
+      parent.scrollTop = parent.scrollHeight;
+      return;
+    }
+  })
+</script>
+

@@ -1,85 +1,282 @@
 ---
+import '../styles/global.css'
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, EMAIL, TWITTER, GITHUB } from '../consts';
 ---
-
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<button class="listcontent-btn" id="menu-toggle">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" height="24px"><path d="M120-280v-66.67h553.33V-280H120Zm0-166.67v-66.66h553.33v66.66H120Zm0-166.66V-680h553.33v66.67H120ZM806.33-280q-14 0-23.5-9.58-9.5-9.59-9.5-23.75 0-13.67 9.59-23.5 9.58-9.84 23.75-9.84 13.66 0 23.5 9.84Q840-327 840-313q0 14-9.83 23.5-9.84 9.5-23.84 9.5Zm0-166.67q-14 0-23.5-9.58t-9.5-23.75q0-13.67 9.59-23.5 9.58-9.83 23.75-9.83 13.66 0 23.5 9.83 9.83 9.83 9.83 23.83 0 14-9.83 23.5-9.84 9.5-23.84 9.5Zm0-166.66q-14 0-23.5-9.59-9.5-9.58-9.5-23.75 0-13.66 9.59-23.5 9.58-9.83 23.75-9.83 13.66 0 23.5 9.83 9.83 9.84 9.83 23.84t-9.83 23.5q-9.84 9.5-23.84 9.5Z"/></svg>
+		</button>
+		<div class="site-title">
+			<a href="/">
+				<img class="avatar" fetchpriority="high" src="/avatar.jpg" />
+				<div><span>{SITE_TITLE}</span></div>
+			</a>
+		</div>
+		
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+			<HeaderLink href="/links">Links</HeaderLink>
 		</div>
+
 		<div class="social-links">
-			<a href="https://m.webtoo.ls/@astro" target="_blank">
-				<span class="sr-only">Follow Astro on Mastodon</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
-					><path
-						fill="currentColor"
-						d="M11.19 12.195c2.016-.24 3.77-1.475 3.99-2.603.348-1.778.32-4.339.32-4.339 0-3.47-2.286-4.488-2.286-4.488C12.062.238 10.083.017 8.027 0h-.05C5.92.017 3.942.238 2.79.765c0 0-2.285 1.017-2.285 4.488l-.002.662c-.004.64-.007 1.35.011 2.091.083 3.394.626 6.74 3.78 7.57 1.454.383 2.703.463 3.709.408 1.823-.1 2.847-.647 2.847-.647l-.06-1.317s-1.303.41-2.767.36c-1.45-.05-2.98-.156-3.215-1.928a3.614 3.614 0 0 1-.033-.496s1.424.346 3.228.428c1.103.05 2.137-.064 3.188-.189zm1.613-2.47H11.13v-4.08c0-.859-.364-1.295-1.091-1.295-.804 0-1.207.517-1.207 1.541v2.233H7.168V5.89c0-1.024-.403-1.541-1.207-1.541-.727 0-1.091.436-1.091 1.296v4.079H3.197V5.522c0-.859.22-1.541.66-2.046.456-.505 1.052-.764 1.793-.764.856 0 1.504.328 1.933.983L8 4.39l.417-.695c.429-.655 1.077-.983 1.934-.983.74 0 1.336.259 1.791.764.442.505.661 1.187.661 2.046v4.203z"
-					></path></svg
-				>
+			<!-- Thank you Gemini -->
+			<div class="theme-toggle">
+				<a href="/links">
+					<svg xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 -960 960 960" width="32" fill="currentColor"><path d="M446.67-280H280q-83 0-141.5-58.5T80-480q0-83 58.5-141.5T280-680h166.67v66.67H280q-55.56 0-94.44 38.84-38.89 38.84-38.89 94.33 0 55.49 38.89 94.49 38.88 39 94.44 39h166.67V-280ZM323.33-446.67v-66.66h313.34v66.66H323.33Zm190 166.67v-66.67H680q55.56 0 94.44-38.84 38.89-38.84 38.89-94.33 0-55.49-38.89-94.49-38.88-39-94.44-39H513.33V-680H680q83 0 141.5 58.5T880-480q0 83-58.5 141.5T680-280H513.33Z"/></svg>
+				</a>
+				<button id="theme-toggle" aria-label="Toggle light and dark mode" class="theme-toggle">
+					<span class="sr-only">Toggle Light/Dark mode</span>
+					<!-- Sun Icon (for light mode) -->
+					<svg id="sun-icon" class="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="5"></circle>
+						<line x1="12" y1="1" x2="12" y2="3"></line>
+						<line x1="12" y1="21" x2="12" y2="23"></line>
+						<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+						<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+						<line x1="1" y1="12" x2="3" y2="12"></line>
+						<line x1="21" y1="12" x2="23" y2="12"></line>
+						<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+						<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+					</svg>
+					<!-- Moon Icon (for dark mode) - initially hidden -->
+					<svg id="moon-icon" class="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+					</svg>
+				</button>
+			</div>
+			<a href={"mailto:" + EMAIL} target="_blank">
+				<span class="sr-only">Email me!</span>
+				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+				  <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"/>
+				</svg>
 			</a>
-			<a href="https://twitter.com/astrodotbuild" target="_blank">
-				<span class="sr-only">Follow Astro on Twitter</span>
+			<a href={"https://x.com/"+TWITTER} target="_blank">
+				<span class="sr-only">Follow me on Twitter</span>
 				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
 					><path
 						fill="currentColor"
 						d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
-					></path></svg
-				>
+					></path></svg>
 			</a>
-			<a href="https://github.com/withastro/astro" target="_blank">
-				<span class="sr-only">Go to Astro's GitHub repo</span>
+			<a href={"https://github.com/"+GITHUB} target="_blank">
+				<span class="sr-only">See my GitHub profile</span>
 				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"
 					><path
 						fill="currentColor"
 						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-					></path></svg
-				>
+					></path></svg>
 			</a>
 		</div>
 	</nav>
 </header>
 <style>
-	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
 
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
+@media (max-width: 1023px) {
+	.internal-links, .social-links>a {
+		display: none !important;
 	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+}
+
+@media (min-width: 1024px) {
+	div.theme-toggle > a {
+		display: none;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
+}
+
+.listcontent-btn {
+	display: flex;
+	background: inherit;
+	margin-right: .5rem;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	height: 24px;
+	transition: background-color 0.15s ease; /* Smooth transition for icon color */
+}
+
+.listcontent-btn:hover {
+	background-color: rgb(var(--hover-color));
+}
+
+@media (min-width: 1024px) {
+	.listcontent-btn {
+		display: none;
 	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
+}
+
+.listcontent-btn > svg {
+	background: none;
+	fill: rgb(var(--text-color));
+}
+
+img.avatar {
+	aspect-ratio: 1;
+	width: 2rem;
+	height: 2rem;
+	object-fit: contain;
+	border-radius: 0;
+	padding-top: auto;
+	padding-bottom: auto;
+}
+
+header {
+	margin: 0;
+	padding: 1rem 1.5em;
+	background: rgba(var(--bg-color), 1);
+	border-bottom-color: rgba(var(--border-color), .9);
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	box-sizing: border-box;
+}
+
+nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 2rem;
+}
+nav a {
+	padding: .4em 0.5em;
+	color: var(--text-color);
+	border-bottom: 4px solid transparent;
+	text-decoration: none;
+}
+nav a.active {
+	text-decoration: none;
+	border-bottom-color: rgba(var(--active-color), .7);
+}
+.social-links,
+.social-links a {
+	display: flex;
+	align-items: center;
+}
+@media (max-width: 720px) {
+	.social-links {
+		display: none;
 	}
-	.social-links,
-	.social-links a {
-		display: flex;
-	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
+}
+
+div.internal-links {
+	margin-right: auto;
+	letter-spacing: -0.025rem;
+	font-weight: 400;
+}
+
+div.site-title {
+	margin-right: auto;
+}
+
+div.site-title a {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	align-items: center;
+	border: 0;
+}
+
+div.site-title div span {
+	text-wrap: pretty;
+	margin-inline-start: .75rem;
+	font-weight: 500;
+	font-size: 1.125rem;
+	text-align: center;
+	vertical-align: middle;
+	letter-spacing: -0.025rem;
+}
+
+.theme-toggle {
+	display: flex;
+	min-width: 32px;
+	height: 32px;
+	padding: .5em;
+	padding-bottom: 11px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: var(--icon-color); /* Use theme variable for toggle icon */
+	transition: color 0.3s ease; /* Smooth transition for icon color */
+}
+button.theme-toggle {
+	padding: 0;
+}
+
+div.theme-toggle > a {
+	padding: 0;
+	padding-right: 1em;
+	margin: auto;
+}
+
+.theme-toggle:hover {
+	color: var(--hover-color); /* Hover effect for toggle button */
+}
+
+</style>
+
+<script is:inline>
+	const menuToggle = document.getElementById('menu-toggle');
+	menuToggle.addEventListener('click', () => {
+		const article = document.getElementsByTagName("article")[0];
+		const posttree = document.getElementById("posttree-sidebar");
+		article.classList.toggle('article-hidden');
+		posttree.classList.toggle('posttree-active');
+	});
+</script>
+
+<script is:inline>
+	// Get references to the theme toggle button and icons
+	const themeToggle = document.getElementById('theme-toggle');
+	const sunIcon = document.getElementById('sun-icon');
+	const moonIcon = document.getElementById('moon-icon');
+
+	/**
+	 * Sets the current theme of the website.
+	 * @param {string} theme - 'light' or 'dark'.
+	 */
+	function setTheme(theme) {
+		if (theme === 'dark') {
+			// Add 'dark-mode' class to the html element
+			document.documentElement.classList.add('dark-mode');
+			// Show moon icon, hide sun icon
+			sunIcon.style.display = 'none';
+			moonIcon.style.display = 'block';
+			// Save preference to local storage
+			localStorage.setItem('theme', 'dark');
+		} else {
+			// Remove 'dark-mode' class from the html element
+			document.documentElement.classList.remove('dark-mode');
+			// Show sun icon, hide moon icon
+			sunIcon.style.display = 'block';
+			moonIcon.style.display = 'none';
+			// Save preference to local storage
+			localStorage.setItem('theme', 'light');
 		}
 	}
-</style>
+
+	// Check for saved theme preference on page load
+	document.addEventListener('DOMContentLoaded', () => {
+		const savedTheme = localStorage.getItem('theme');
+		// If a theme is saved in local storage, use it
+		if (savedTheme) {
+			setTheme(savedTheme);
+		} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			// If no theme is saved, check the user's system preference
+			setTheme('dark');
+		} else {
+			// Default to light mode if no preference is found
+			setTheme('light');
+		}
+	});
+
+	// Add event listener to the theme toggle button
+	themeToggle.addEventListener('click', () => {
+		const currentTheme = localStorage.getItem('theme');
+		// Toggle between dark and light themes
+		if (currentTheme === 'dark') {
+			setTheme('light');
+		} else {
+			setTheme('dark');
+		}
+	});
+</script>

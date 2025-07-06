@@ -1,0 +1,24 @@
+---
+const { item, standalone, pathname } = Astro.props
+const isPost = item.type === "BlogPost";
+const active = isPost && pathname === item.url;
+const anchorClass = active ? " posttree-entry-active" : "" + !standalone ? " posttree-nested-entry" : " posttree-standalone-post"
+const linkClass = "posttree-second-entry" + anchorClass;
+const liClass = "posttree-second-block" + (item.type === "Serie" ? " posttree-post-series" : "") + (standalone ? " posttree-standalone-post" : "");
+---
+
+<li class={liClass}>
+  { !isPost && <span class={"posttree-second-entry"+anchorClass}> { item.title } </span>}
+  { isPost && <a href={item.url} class={linkClass}> { item.title } </a> }
+  {
+    item.type === 'Serie' && item.posts.length !== 0 && (
+      <ul class="posttree-serie-block">
+        {
+          item.posts.map(subItem => (
+            <Astro.self standalone={false} item={subItem} pathname={pathname} />
+          ))
+        }
+      </ul>
+    )
+  }
+</li>

@@ -1,27 +1,21 @@
-# Design
+# YuriVerse
 
-## Structure
+## About this website
 
-- Using src/content folder to store blogposts.
-- Posts have their own directory with index.md, of which the cwd will be its parent directory.
-- Posts can be standalone, and can be categorized as a series/topic.
-- A series/topic is also represented as a subdirectory, with info.json, which has the information for the series.
-- i.e. A tree structure.
+This website is hosting on Github Page on the domain name of <https://awsl.rip>.
 
-## Pages
-- Home page is an *about* introduction, below that lists recent published posts. *A page control should be implemented*.
-- The left panel displays all series and posts (can be collapsed).
-- The right side should be all headers' references.
-- Mobile support for search, tab, and navigation.
-- Recommend readings at the bottom.
+## Link exchange
+**Your links are welcomed.** Before you submitting your links, please consider adding my link in your website.
 
-## Search
-- Show all articles with tag
-- Search by title/category/tag
+There are two ways of adding your links to my website.
 
-## Garbage collection
-- Collect unused resources, mostly images.
+1. Creating a Github Issue.
+2. Fork this repository, and add your link at `src/links.json`.
 
-## Hooks
-- Put garbages into trash can after building. Disable the hook when there is no trashcan detected.
-
+# Acknowledgement
+- Powered by [🚀Astro](https://astro.build/).
+- Design referenced to [Gitbook Theme](https://gitbook.com) and [Gemini](https://gemini.google.com/)
+- [Mermaid](https://mermaid.js.org/)
+- [Katex](https://katex.org/)
+- [remark-math](https://github.com/remarkjs/remark-math)
+- [rehype-mermaid](https://github.com/remcohaszing/rehype-mermaid)

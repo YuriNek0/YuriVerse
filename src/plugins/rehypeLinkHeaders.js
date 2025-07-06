@@ -15,6 +15,17 @@ const slugger = new GithubSlugger();
 export function rehypeLinkHeaders(options = {}) {
  
   const prefix = "prefix" in options ? options.prefix : default_prefix;
+  const getTitle = (node) => {
+    const texts = [];
+    node.children?.forEach(child => {
+      if (child.type === 'text') {
+        texts.push(child.value);
+      }
+      // console.log(texts);
+      texts.push(...getTitle(child));
+    });
+    return texts;
+  }
 
   return (tree, file) => {
     const headings = [];
@@ -31,7 +42,7 @@ export function rehypeLinkHeaders(options = {}) {
       if (lvl_utf < 49 || lvl_utf > 54) return; // range in 1-6
 
       const lvl = lvl_utf - 48; // - '0'
-      const title = node.children.filter(c => c.type === 'text').map(c => c.value).join(' ').trim();
+      const title = getTitle(node).join(' ').trim();
       const id = prefix + slugger.slug(title.toLowerCase());
 
       if (node.properties) {
