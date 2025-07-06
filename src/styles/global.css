@@ -331,6 +331,7 @@ li ul, li ol {
 
 article {
 	display: flex;
+	width: 60vw;
 	flex-direction: column;
 	margin-left: auto;
 	margin-right: auto;
@@ -338,6 +339,9 @@ article {
 }
 
 @media (max-width: 1023px) {
+	article {
+		width: unset;
+	}
 	article.article-hidden {
 		display: none;
 	}
