@@ -2,9 +2,10 @@
 
 ## About this website
 
-This website is hosting on Github Page on the domain name of <https://awsl.rip>.
+This website is hosting on [Cloudflare Pages](https://pages.cloudflare.com/) on the domain name of <https://awsl.rip>.
 
 ## Link exchange
+
 **Your links are welcomed.** Before you submitting your links, please consider adding my link in your website.
 
 There are two ways of adding your links to my website.

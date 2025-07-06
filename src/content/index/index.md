@@ -34,6 +34,6 @@ I personally don't like to categories them as _tech stack_, since I am just usin
 
 ## **About the blog**
 
-This blog is a static website based on 🚀 [Astro](https://github.com/withastro/astro/) hosting on Github Pages.
+This blog is a static website based on 🚀 [Astro](https://github.com/withastro/astro/) hosting on [Cloudflare Pages](https://pages.cloudflare.com/).
 Without frontend experiences, I built the blog theme from almost ground up, which is a simple replica of the previous GitBook theme.
 If there is an user experience issue, feel free to [create an issue](https://github.com/YuriNek0/YuriVerse).
