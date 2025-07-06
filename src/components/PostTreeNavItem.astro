@@ -1,7 +1,9 @@
 ---
+const stripslash = str => str.endsWith('/') ? str.slice(0, -1) : str;
+
 const { item, standalone, pathname } = Astro.props
 const isPost = item.type === "BlogPost";
-const active = isPost && pathname === item.url;
+const active = isPost && stripslash(pathname) === stripslash(item.url);
 const anchorClass = active ? " posttree-entry-active" : "" + !standalone ? " posttree-nested-entry" : " posttree-standalone-post"
 const linkClass = "posttree-second-entry" + anchorClass;
 const liClass = "posttree-second-block" + (item.type === "Serie" ? " posttree-post-series" : "") + (standalone ? " posttree-standalone-post" : "");

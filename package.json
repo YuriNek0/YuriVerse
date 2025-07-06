@@ -6,8 +6,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "cloudflare-action": "npm ci && npx playwright install --with-deps && npm run build"
+    "astro": "astro"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
@@ -22,6 +21,7 @@
   },
   "devDependencies": {
     "rehype-mermaid": "^3.0.0",
-    "vite-plugin-devtools-json": "^0.2.1"
+    "vite-plugin-devtools-json": "^0.2.1",
+    "wrangler": "^4.23.0"
   }
 }
