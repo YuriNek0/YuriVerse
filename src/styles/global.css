@@ -342,6 +342,10 @@ article {
 	article {
 		width: unset;
 	}
+	.prose {
+		padding: 0 !important;
+		max-width: calc(100vw - 4rem) !important;
+	}
 	article.article-hidden {
 		display: none;
 	}

@@ -85,3 +85,9 @@ span.post-next-nav-title {
 	color: rgb(var(--text-color));
 	margin-right: auto;
 }
+
+@media (max-width: 1023px) {
+	div.posts-next-nav {
+		padding-top: 2rem;
+	}
+}

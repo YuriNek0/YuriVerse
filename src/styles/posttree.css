@@ -5,6 +5,7 @@
 @media (max-width: 1023px) {
 	.posttree-active {
 		display: flex;
+		position: absolute;
 		max-height: calc(100vh - 4.85rem);
 		width: -webkit-fill-available;
 	  -webkit-mask-image: linear-gradient(rgba(0,0,0,1) 90%,rgba(0,0,0,0));
@@ -12,6 +13,10 @@
 	}
 	ul.posttree-block {
 		width: -webkit-fill-available;
+		overflow-y: scroll !important;
+	}
+	.posttree-sidebar > ul {
+		padding-bottom: 8rem !important;
 	}
 	.posttree-category-title {
 		top: 0 !important;
@@ -21,6 +26,10 @@
 }
 
 @media (min-width: 1024px) {
+	.posttree-sidebar > ul {
+		padding-bottom: 4rem !important;
+	}
+
 	.posttree-sidebar {
 		display: flex;
 		position: sticky;
@@ -37,10 +46,6 @@
 	.posttree-sidebar {
 		min-width: 20vw;
 	}
-}
-
-.posttree-sidebar > ul {
-	padding-bottom: 4rem !important;
 }
 
 ul.posttree-block {
