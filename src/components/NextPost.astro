@@ -8,7 +8,7 @@ const next = await getNextPost(post);
 <div class="posts-next-nav">
   {
     prev && (
-       <a class="posts-prev-nav" href={prev?.url}>
+       <a class="posts-prev-nav" href={prev?.url} style={ !next && { width: "100%" } }>
         <svg class="posts-next-nav" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"><path d="M624-96 240-480l384-384 68 68-316 316 316 316-68 68Z"/></svg>
         <div class="posts-next-nav-box">
           <span class="post-prev-nav"> Previous </span>
@@ -20,7 +20,7 @@ const next = await getNextPost(post);
 
   {
     next && (
-      <a class="posts-next-nav" href={next?.url}>
+      <a class="posts-next-nav" href={next?.url} style={ !prev && { width: "100%" } }>
         <div class="posts-next-nav-box">
           <span class="post-next-nav"> Next </span>
           <span class="post-next-nav-title"> {next?.title} </span>
