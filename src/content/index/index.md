@@ -28,8 +28,9 @@ I personally don't like to categories them as _tech stack_, since I am just usin
 
 ### **⚙️ Dotfiles**
 
-* **LF**: Support image preview in terminal
-* **NeoVim**: LunarVim theme with debuggers
+I have used all three mainstream operating systems. Now I am mainly on Windows.
+Each branch on the following repository contains dotfiles at when I was using one OS.
+
 * **Link**: [**https://github.com/yurinek0/dotfiles**](https://github.com/yurinek0/dotfiles)
 
 ## **About the blog**
@@ -37,3 +38,5 @@ I personally don't like to categories them as _tech stack_, since I am just usin
 This blog is a static website based on 🚀 [Astro](https://github.com/withastro/astro/) hosting on [Cloudflare Pages](https://pages.cloudflare.com/).
 Without frontend experiences, I built the blog theme from almost ground up, which is a simple replica of the previous GitBook theme.
 If there is an user experience issue, feel free to [create an issue](https://github.com/YuriNek0/YuriVerse).
+
+RSS Link: [**https://awsl.rip/rss.xml**](/rss.xml)
