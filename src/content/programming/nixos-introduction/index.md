@@ -52,7 +52,7 @@ Nix is a programming language that will be used to build your NixOS configuratio
 
 - Recursive attribute set can be used to access elements inside the set itself when defining.
 
-  ```
+  ```nix
   rec { a = 1; b = a+1; c = b+1; }
   ```
 - Accessing an attribute can be simply done by `.`: `set.attribute`.
@@ -69,7 +69,7 @@ Nix is a programming language that will be used to build your NixOS configuratio
 
 #### Changing the scope
 Use `with <set>; <expr>` expression can change the capturing scope of the next expression.
-```
+```nix
 # set <- { a = 1; b = 2; }
 {
 	x = with set; [a, b]; # a and b can be captured here.
@@ -87,38 +87,17 @@ Use `let <name> = <expr>; <name2> = <expr>; in <expr>` to assign variables to th
 Just like Bash, variables can be captures in string using `${...}`: `"The value of var is ${var}."`.
 
 ### Operators
-Here is a table of operators from [Nix 2.32.5 Reference Manual](https://nix.dev/manual/nix/2.32/language/operators)
+Here are some useful operators of Nix. More information can be found at [Nix 2.32.5 Reference Manual](https://nix.dev/manual/nix/2.32/language/operators).
 
-| **Name**                      | **Syntax**                                 | **Associativity** | **Precedence** |
-| ----------------------------- | ------------------------------------------ | ----------------- | -------------- |
-| Attribute selection           | *attrset* `.` *attrpath* [ **or** *expr* ] | none              | 1              |
-| Function application          | *func expr*                                | left              | 2              |
-| Arithmetic negation           | `-` *number*                               | none              | 3              |
-| Has attribute                 | *attrset* `?` *attrpath*                   | none              | 4              |
-| List concatenation            | *list* `++` *list*                         | right             | 5              |
-| Multiplication                | *number* `*` *number*                      | left              | 6              |
-| Division                      | *number* `/` *number*                      | left              | 6              |
-| Subtraction                   | *number* `-` *number*                      | left              | 7              |
-| Addition                      | *number* `+` *number*                      | left              | 7              |
-| String concatenation          | *string* `+` *string*                      | left              | 7              |
-| Path concatenation            | *path* `+` *path*                          | left              | 7              |
-| Path and string concatenation | *path* `+` *string*                        | left              | 7              |
-| String and path concatenation | *string* `+` *path*                        | left              | 7              |
-| Logical negation (**NOT**)    | `!` *bool*                                 | none              | 8              |
-| Update                        | *attrset* `//` *attrset*                   | right             | 9              |
-| Less than                     | *expr* `<` *expr*                          | none              | 10             |
-| Less than or equal to         | *expr* `<=` *expr*                         | none              | 10             |
-| Greater than                  | *expr* `>` *expr*                          | none              | 10             |
-| Greater than or equal to      | *expr* `>=` *expr*                         | none              | 10             |
-| Equality                      | *expr* `==` *expr*                         | none              | 11             |
-| Inequality                    | *expr* `!=` *expr*                         | none              | 11             |
-| Logical conjunction (**AND**) | *bool* `&&` *bool*                         | left              | 12             |
-| Logical disjunction (**OR**)  | *bool* `                                   |                   | ` *bool*       |
-| Logical implication           | *bool* `->` *bool*                         | right             | 14             |
-| Pipe operator (experimental)  | *expr* `                                   | >` *func*         | left           |
-| Pipe operator (experimental)  | *func* `<                                  | ` *expr*          | right          |
-
-Note: Pipe operator can be used to pass arguments to a function.
+- Function application: `<func> <expr>`
+- Add/Sub/Mul/Div: `+, -, *, /`
+- String/Path concatenation: `+`
+- Combine two sets: `<set1> // <set2>`
+- List concatenation: `<list1> ++ <list2>`
+- Comparison: `!=, ==, <, <=, >, >=`
+- Has attribute: `<set> ? <attrpath>`
+- Boolean operations: `!, &&, ||, ->`, in which `->` is boolean implication.
+- Pipe (experimental): `|>, <|`, which can be used to pass an argument to a function.
 
 ## Flakes
 
@@ -138,7 +117,7 @@ A flake has the following structure. All inputs will be evaluated before executi
 	outputs = { self, nixpkgs, ... }@inputs: {
 		# Access inputs in function arguments
 		# With @inputs, you can also access the inputs directly here.
-	}
+	};
 }
 ```
 
@@ -151,7 +130,7 @@ A set will be merged by adding attributes, and a list will be merged by concaten
 Here is an example of enabling SSH server on a host. 
 
 ```nix
-// sshd.nix
+# sshd.nix
 {
   flake.modules.nixos.sshd = {
     services.openssh.enable = true;
@@ -159,7 +138,7 @@ Here is an example of enabling SSH server on a host.
   };
 }
 
-// host.nix
+# host.nix
 {
   flake.modules.nixos.host-qemu-aarch64 =
     { lib, pkgs, ... }:
@@ -171,7 +150,7 @@ Here is an example of enabling SSH server on a host.
     };
 }
 
-// flake.nix -> output
+# flake.nix -> output
 {
   flake.nixosConfigurations.qemu-aarch64 = {
   	system = "aarch64-linux";
@@ -191,7 +170,7 @@ The installation is pretty simple. First download l ISO image in [NixOS Download
 
 ### Flakes Structure
 
-```
+```plain
 features/ -- System functionalities, such as ssh and global packages.
 users/    -- User configurations.
 hosts/    -- Host configurations.
@@ -727,7 +706,7 @@ After niri starts, it will automatically use [app2unit](https://github.com/Vladi
 
 In `hosts/<hostname>.nix`, we typically need to configure hardware information and kernel modules specifically for this host, which can be copied directly from `/etc/nixos/hardware-configuration.nix` after a fresh install. The configuration file below added a few other options, including `imports` for profiles and features, `LIBGL_ALWAYS_SOFTWARE` environment variable to resolve an issue when GUI programs failed to render, and kernel modules for QEMU guests.
 
-```
+```nix
 { self, ... }:
 {
   flake.modules.nixos.host-qemu-aarch64 =

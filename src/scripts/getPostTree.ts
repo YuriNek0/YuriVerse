@@ -33,12 +33,23 @@ export async function getPostTree() {
         const serie: Serie = category.blogs.get(serieEntry.id);
         serie.blogs.set(b.id, { type: "BlogPost", title: b.data.title, pubDate: b.data.pubDate, url: '/'+slug(category.title)+'/'+slug(serie.title)+'/'+slug(b.data.title)});
         serie.pubDate = serie.pubDate.valueOf() < b.data.pubDate.valueOf() ? b.data.pubDate : serie.pubDate;
-        category.pubDate = category.pubDate.valueOf() < serie.pubDate.valueOf() ? serie.pubDate : category.pubDate;
+
+        // Put Archive at the bottom
+        if (category.title == "Archive")
+          category.pubDate = new Date(0);
+        else
+          category.pubDate = category.pubDate.valueOf() < serie.pubDate.valueOf() ? serie.pubDate : category.pubDate;
+
         return;
       }
       
       category.blogs.set(b.id, { type: "BlogPost", title: b.data.title, pubDate: b.data.pubDate, url: '/'+slug(category.title)+'/'+slug(b.data.title)});
-      category.pubDate = category.pubDate.valueOf() < b.data.pubDate.valueOf() ? b.data.pubDate : category.pubDate;
+
+      // Put Archive at the bottom
+      if (category.title == "Archive")
+        category.pubDate = new Date(0);
+      else
+        category.pubDate = category.pubDate.valueOf() < b.data.pubDate.valueOf() ? b.data.pubDate : category.pubDate;
     }));
 
     // Sort the tree, make them ordered by the latest upload date, except for the series, which will be in ascending order.

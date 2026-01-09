@@ -99,10 +99,10 @@ body {
 }
 
 main {
-    display: flex;
-    scroll-margin-top: 4rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  display: flex;
+  scroll-margin-top: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 h1 {
@@ -362,6 +362,11 @@ header {
     position: sticky;
     display: block;
     z-index: 9; /* The very top element */
+}
+
+footer {
+		padding: 2em 1em 6em 1em;
+		text-align: center;
 }
 
 .category-title {

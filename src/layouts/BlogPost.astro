@@ -1,6 +1,7 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
+import License from '../components/License.astro';
 import TableOfContents from '../components/TableOfContents.astro'
 import PostTree from '../components/PostTree.astro'
 import NextPost from '../components/NextPost.astro'
@@ -65,6 +66,7 @@ const blog = serie === null ? category?.blogs.get(path[0]+'/'+path[1]): serie?.b
 					<slot />
 				</div>
 				<NextPost post={blog} />
+				<License />
 			</article>
 			<TableOfContents indexHeadings={indexHeadings} />
 		</main>

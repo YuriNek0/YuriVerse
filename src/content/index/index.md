@@ -20,15 +20,15 @@ Though still trying to get a peaceful life in rough days, I hope I will learn an
   * Bash, JavaScript, HTML/CSS, SQL
   * and all kinds of programming languages that have a detailed documentation.
 * **Frameworks & Libraries**: React, Node.js, Flask, Django
-* **Tools**: Git, Docker, VS Code, Burpsuite, Ghidra, GDB
+* **Tools**: Git, Docker, Helix, Burpsuite, Binary Ninja, IDA, Ghidra, GDB, etc.
 
 ~~(These are things I used but I am not confident. Need to read docs when I'm using them)~~
 
 I personally don't like to categories them as _tech stack_, since I am just using them as tools but not what I depends on.
 
-### **⚙️ Dotfiles**
+### **⚙️ NixOS Config / Dotfiles**
 
-I have used all three mainstream operating systems. Now I am mainly on Windows.
+I have used all three mainstream operating systems. Now I am mainly on NixOS.
 Each branch on the following repository contains dotfiles at when I was using one OS.
 
 * **Link**: [**https://github.com/yurinek0/dotfiles**](https://github.com/yurinek0/dotfiles)
@@ -40,3 +40,7 @@ Without frontend experiences, I built the blog theme from almost ground up, whic
 If there is an user experience issue, feel free to [create an issue](https://github.com/YuriNek0/YuriVerse).
 
 RSS Link: [**https://awsl.rip/rss.xml**](/rss.xml)
+
+### Licenses
+- Source code of this blog is license under [GNU General Public License v3.0](https://www.gnu.org/licenses/gpl-3.0.en.html).
+- All contents published in [YuriVerse](https://awsl.rip) are licensed under [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/deed.en).

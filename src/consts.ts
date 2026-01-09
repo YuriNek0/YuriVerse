@@ -3,6 +3,7 @@
 
 export const SITE_TITLE = 'YuriVerse';
 export const SITE_DESCRIPTION = 'Attention is all you need. ADHD is all I have.';
+export const SITE_OWNER = "Sayuri Nekomiya"
 export const SITE_URL = "https://awsl.rip";
 export const GITHUB = "yurinek0";
 export const TWITTER = "yuri_nek0";
